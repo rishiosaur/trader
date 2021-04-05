@@ -1,25 +1,25 @@
 export const viewOrderView = (
 	order: {
-		id: string,
-		title: string,
-		description: string,
-		cost: number,
+		id: string
+		title: string
+		description: string
+		cost: number
 		buyer?: {
-			id: string,
-		},
+			id: string
+		}
 		requests: {
-			id: string,
-		}[],
-		created: Date,
+			id: string
+		}[]
+		created: Date
 	},
 	seller: {
-		id: string,
-		name: string,
-		buyingRating: number,
-		buyingRatingLength: number,
-		sellingRating: number,
-		sellingRatingLength: number,
-		image: string,
+		id: string
+		name: string
+		buyingRating: number
+		buyingRatingLength: number
+		sellingRating: number
+		sellingRatingLength: number
+		image: string
 	},
 	user: string
 ) => ({
@@ -39,7 +39,7 @@ export const viewOrderView = (
 		},
 		{
 			type: 'section',
-			block_id:'fields',
+			block_id: 'fields',
 			fields: [
 				{
 					type: 'mrkdwn',
@@ -125,25 +125,34 @@ export const viewOrderView = (
 				text: order.cost.toString(),
 			},
 		},
-				 {
-						type: 'section',
-						text: {
-							type: 'mrkdwn',
-							text: order.buyer ? `Bought by <@${order.buyer.id}>` : 'Available for purchase',
-						},
-					}
+		{
+			type: 'section',
+			text: {
+				type: 'mrkdwn',
+				text: order.buyer
+					? `Bought by <@${order.buyer.id}>`
+					: 'Available for purchase',
+			},
+		},
 	],
 	...(!order.buyer && {
-		submit: !order.buyer && (!order.requests.map((z) => z.id).includes(user)  ? {
-			type: 'plain_text',
-			emoji: true,
-			text: ':white_check_mark: Buy'
-		} : {
-			type: 'plain_text',
-			emoji: true,
-			text: ':x: Remove request'
-		}),
-		'callback_id': !order.buyer && (!order.requests.map((z) => z.id).includes(user)  ? 'request_buy_order' : 'remove_buy_request'),
-	})
-});
-
+		submit:
+			!order.buyer &&
+			(!order.requests.map((z) => z.id).includes(user)
+				? {
+						type: 'plain_text',
+						emoji: true,
+						text: ':white_check_mark: Buy',
+				  }
+				: {
+						type: 'plain_text',
+						emoji: true,
+						text: ':x: Remove request',
+				  }),
+		callback_id:
+			!order.buyer &&
+			(!order.requests.map((z) => z.id).includes(user)
+				? 'request_buy_order'
+				: 'remove_buy_request'),
+	}),
+})
