@@ -506,7 +506,7 @@ const orderController = (app: App) => {
 
 		const orders = unfiltered.filter((z) => z.approved)
 
-		await postMessage(body.channel_id, [
+		await postEphemeral(body.channel_id, body.user_id,[
 			{
 				type: 'header',
 				text: {
