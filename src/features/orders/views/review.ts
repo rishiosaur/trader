@@ -107,7 +107,7 @@ export const reviewOfferView = (
 		type: 'section',
 		text: {
 			type: 'mrkdwn',
-			text: 'Description',
+			text: '*Description*',
 		},
 	},
 	{
@@ -121,14 +121,14 @@ export const reviewOfferView = (
 		type: 'section',
 		text: {
 			type: 'mrkdwn',
-			text: 'Price',
+			text: '*Price*',
 		},
 	},
 	{
 		type: 'section',
 		text: {
 			type: 'mrkdwn',
-			text: order.cost,
+			text: `${order.cost  }HN`,
 		},
 	},
 	{

@@ -386,7 +386,7 @@ const orderController = (app: App) => {
 
 		await sendToStreamChannel(
 			...blocksAndText(
-				`:shiba-alert: An exciting new product has landed! Check out *${order.title}* (ID \`${order.id}\`), sold by <@${order.seller.id}> (S: ${order.seller.sellingRating} / B: ${order.seller.buyingRating})!\n>*${order.title}* \n>${order.description}`
+				`:shiba-alert: An exciting new product has landed! Check out "*${order.title}*", sold by <@${order.seller.id}> (S: ${order.seller.sellingRating} / B: ${order.seller.buyingRating})!\n>*${order.title}* \n>${order.description}\n\n To buy this, run \`/market-order ${order.id}\``
 			)
 		)
 	})
