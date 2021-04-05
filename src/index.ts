@@ -15,7 +15,7 @@ export const app = new App({
 	// Start your app
 	await app.start(process.env.PORT || 9908)
 
-	console.log(`${name} is running! 🔥`)
+	console.log(`${name} is running on port ${process.env.PORT || 9908}! 🔥`)
 
 	for (const [feature, handler] of Object.entries(features)) {
 		handler(app)
