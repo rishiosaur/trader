@@ -299,7 +299,7 @@ const orderController = (app: App) => {
 		await postMessage(
 			body.user.id,
 			...blocksAndText(
-				`:wave: Hey there, ${user.profile.real_name_normalized}! Thank you for submitting a product onto the Hack Club Marketplace. To protect against spam, we moderate all of our product requests, so stay tuned for our decision on "${title}"! You'll receive another DM with any updates soon. \n Feel free to DM <usergroup> at any time for any questions!`
+				`:wave: Hey there, ${user.profile.real_name_normalized}! Thank you for submitting a product onto the Hack Club Marketplace. To protect against spam, we moderate all of our product requests, so stay tuned for our decision on "${title}"! You'll receive another DM with any updates soon. \n Feel free to DM <@UHFEGV147> at any time for any questions!`
 			)
 		)
 	})
@@ -885,6 +885,8 @@ const orderController = (app: App) => {
 					`Woot woot! You are now the proud owner of "${entity.title}", sold by the wonderful <@${entity.seller.id}>. Make sure to pay the invoice by running \`/pay ${transaction}\`; you can (and probably will) be rated as a buyer!\n\n To rate the selling experience from <@${entity.seller.id}>, you can use the \`/market-rate-seller\` command. Make sure to get in touch with them!`
 				)
 			)
+
+			await sendToStreamChannel(...blocksAndText(`:tada: "${entity.title}" has been sold to <@${buyer}> for ${entity.cost}HN!`))
 		} catch (e) {
 			console.log(e)
 			await postEphemeral(
