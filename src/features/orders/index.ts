@@ -475,8 +475,6 @@ const orderController = (app: App) => {
 
 	// View orders on hand
 	app.command(t('/market'), async ({ ack, body, say }) => {
-		await ack()
-
 		const { orders: unfiltered } = await Market.request(
 			gql`
 				# Write your query or mutation here
@@ -506,90 +504,94 @@ const orderController = (app: App) => {
 
 		const orders = unfiltered.filter((z) => z.approved)
 
-		await postEphemeral(body.channel_id, body.user_id, [
-			{
-				type: 'header',
-				text: {
-					type: 'plain_text',
-					text: ':shopping_bags:  Market!',
-					emoji: true,
+		await ack({
+			text: "this message can't be displayed in your client",
+			response_type: 'ephemeral',
+			blocks: [
+				{
+					type: 'header',
+					text: {
+						type: 'plain_text',
+						text: ':shopping_bags:  Market!',
+						emoji: true,
+					},
 				},
-			},
-			{
-				type: 'context',
-				elements: [
-					{
-						type: 'mrkdwn',
-						text:
-							"Stuff that's on sale right now. :flying_money_with_wings: To buy something, use `/market-view <id>` and click 'Buy'",
-					},
-				],
-			},
-			...orders
-				.map((order) => [
-					{
-						type: 'divider',
-					},
-					{
-						type: 'section',
-						text: {
+				{
+					type: 'context',
+					elements: [
+						{
 							type: 'mrkdwn',
-							text: `:package: *Product:* ${order.title} `,
+							text:
+								"Stuff that's on sale right now. :flying_money_with_wings: To buy something, use `/market-view <id>` and click 'Buy'",
 						},
-					},
-					{
-						type: 'section',
-						fields: [
-							{
-								type: 'mrkdwn',
-								text: `:clock10: *Created*: ${new Date(
-									order.created
-								).toLocaleDateString()}`,
-							},
-							{
-								type: 'mrkdwn',
-								text: `:take_my_money: *Purchase requests*: ${order.requests.length}`,
-							},
-							{
-								type: 'mrkdwn',
-								text: `:money_dinosaur: *Buyer*: ${
-									order.buyer ? `<@${order.buyer.id}>` : 'Could be you!'
-								}`,
-							},
-							{
-								type: 'mrkdwn',
-								text: `:money_mouth_face: *Price* ${order.cost}`,
-							},
-						],
-					},
-					{
-						type: 'section',
-						text: {
-							type: 'mrkdwn',
-							text: `Description:\n>${order.description}`,
+					],
+				},
+				...orders
+					.map((order) => [
+						{
+							type: 'divider',
 						},
-					},
-					{
-						type: 'context',
-						elements: [
-							{
+						{
+							type: 'section',
+							text: {
 								type: 'mrkdwn',
-								text: `Sold by: <@${order.seller.id}> (Buying rating: ${order.seller.buyingRating} / Selling rating: ${order.seller.sellingRating}) - to learn more, run \`/market-user <@${order.seller.id}>\``,
+								text: `:package: *Product:* ${order.title} `,
 							},
-						],
-					},
-					{
-						type: 'context',
-						elements: [
-							{
+						},
+						{
+							type: 'section',
+							fields: [
+								{
+									type: 'mrkdwn',
+									text: `:clock10: *Created*: ${new Date(
+										order.created
+									).toLocaleDateString()}`,
+								},
+								{
+									type: 'mrkdwn',
+									text: `:take_my_money: *Purchase requests*: ${order.requests.length}`,
+								},
+								{
+									type: 'mrkdwn',
+									text: `:money_dinosaur: *Buyer*: ${
+										order.buyer ? `<@${order.buyer.id}>` : 'Could be you!'
+									}`,
+								},
+								{
+									type: 'mrkdwn',
+									text: `:money_mouth_face: *Price* ${order.cost}`,
+								},
+							],
+						},
+						{
+							type: 'section',
+							text: {
 								type: 'mrkdwn',
-								text: `To buy this product, run \`/market-order ${order.id}\``,
+								text: `Description:\n>${order.description}`,
 							},
-						],
-					},
-				])
-				.flat(),
-		])
+						},
+						{
+							type: 'context',
+							elements: [
+								{
+									type: 'mrkdwn',
+									text: `Sold by: <@${order.seller.id}> (Buying rating: ${order.seller.buyingRating} / Selling rating: ${order.seller.sellingRating}) - to learn more, run \`/market-user <@${order.seller.id}>\``,
+								},
+							],
+						},
+						{
+							type: 'context',
+							elements: [
+								{
+									type: 'mrkdwn',
+									text: `To buy this product, run \`/market-order ${order.id}\``,
+								},
+							],
+						},
+					])
+					.flat(),
+			],
+		})
 	})
 
 	// View specific order
