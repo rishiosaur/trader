@@ -128,7 +128,7 @@ export const reviewOfferView = (
 		type: 'section',
 		text: {
 			type: 'mrkdwn',
-			text: `${order.cost  }HN`,
+			text: `${order.cost}HN`,
 		},
 	},
 	{
@@ -269,7 +269,7 @@ export const rejectedOrderView = (
 		type: 'section',
 		text: {
 			type: 'mrkdwn',
-			text: 'Description',
+			text: '*Description*',
 		},
 	},
 	{
@@ -283,7 +283,7 @@ export const rejectedOrderView = (
 		type: 'section',
 		text: {
 			type: 'mrkdwn',
-			text: 'Price',
+			text: '*Price*',
 		},
 	},
 	{
@@ -410,7 +410,7 @@ export const approvedOrderView = (
 		type: 'section',
 		text: {
 			type: 'mrkdwn',
-			text: 'Description',
+			text: '*Description*',
 		},
 	},
 	{
@@ -424,7 +424,7 @@ export const approvedOrderView = (
 		type: 'section',
 		text: {
 			type: 'mrkdwn',
-			text: 'Price',
+			text: '*Price*',
 		},
 	},
 	{
