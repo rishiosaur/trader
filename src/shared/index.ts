@@ -2,7 +2,8 @@ import { marketReviewChannel, marketStreamChannel, token } from '../config'
 
 import { app } from '../index'
 
-export const t = (s: string) => process.env.NODE_ENV === 'production' ? s : `${s  }-test`
+export const t = (s: string) =>
+	process.env.NODE_ENV === 'production' ? s : `${s}-test`
 
 export const isUser = (user: string) => !!user.match(/<@(.+?)>/)
 
@@ -18,19 +19,19 @@ export const postMessage = (
 ) =>
 	icon_url && username
 		? app.client.chat.postMessage({
-			channel,
-			text,
-			blocks,
-			token,
-			username,
-			icon_url,
-		})
+				channel,
+				text,
+				blocks,
+				token,
+				username,
+				icon_url,
+		  })
 		: app.client.chat.postMessage({
-			channel,
-			text,
-			blocks,
-			token,
-		})
+				channel,
+				text,
+				blocks,
+				token,
+		  })
 
 export const postMessageCurry = (channel: string) => (
 	blocks?: any[],
