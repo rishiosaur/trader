@@ -1,21 +1,25 @@
-export const ownerRequest = (seller: {
-	id: string,
-	name: string,
-	buyingRating: number,
-	buyingRatingLength: number,
-	sellingRating: number,
-	sellingRatingLength: number,
-	image: string,
-}, order: {
-	id: string,
-	title: string
-}, buyer: string) => ([
+export const ownerRequest = (
+	seller: {
+		id: string
+		name: string
+		buyingRating: number
+		buyingRatingLength: number
+		sellingRating: number
+		sellingRatingLength: number
+		image: string
+	},
+	order: {
+		id: string
+		title: string
+	},
+	buyer: string
+) => [
 	{
-		'type': 'section',
-		'text': {
-			'type': 'mrkdwn',
-			'text': `*New request to purchase "${order.title}" from <@${buyer}>!*`
-		}
+		type: 'section',
+		text: {
+			type: 'mrkdwn',
+			text: `*New request to purchase "${order.title}" from <@${buyer}>!*`,
+		},
 	},
 	{
 		type: 'section',
@@ -25,9 +29,7 @@ export const ownerRequest = (seller: {
 				seller.buyingRatingLength
 			} ratings): ${Array(Math.round(seller.buyingRating))
 				.fill('★')
-				.join('')} \n Seller Rating (${
-				seller.sellingRatingLength
-			} ratings): ${
+				.join('')} \n Seller Rating (${seller.sellingRatingLength} ratings): ${
 				Array(Math.round(seller.sellingRating)).fill('★').join('') || '★'
 			}\n Rated: ${seller.sellingRating} (S) / ${seller.buyingRating} (B)`,
 		},
@@ -38,52 +40,56 @@ export const ownerRequest = (seller: {
 		},
 	},
 	{
-		'type': 'actions',
-		'elements': [
+		type: 'actions',
+		elements: [
 			{
-				'type': 'button',
-				'text': {
-					'type': 'plain_text',
-					'emoji': true,
-					'text': 'Approve'
+				type: 'button',
+				text: {
+					type: 'plain_text',
+					emoji: true,
+					text: 'Approve',
 				},
-				'style': 'primary',
-				'value': `${order.id} | ${buyer}`,
-				'action_id': 'approve_request'
+				style: 'primary',
+				value: `${order.id} | ${buyer}`,
+				action_id: 'approve_request',
 			},
 			{
-				'type': 'button',
-				'text': {
-					'type': 'plain_text',
-					'emoji': true,
-					'text': 'Reject'
+				type: 'button',
+				text: {
+					type: 'plain_text',
+					emoji: true,
+					text: 'Reject',
 				},
-				'style': 'danger',
-				'value': `${order.id} | ${buyer}`,
-				'action_id': 'reject_request'
-			}
-		]
-	}
-])
+				style: 'danger',
+				value: `${order.id} | ${buyer}`,
+				action_id: 'reject_request',
+			},
+		],
+	},
+]
 
-export const approvedRequest = (seller: {
-	id: string,
-	name: string,
-	buyingRating: number,
-	buyingRatingLength: number,
-	sellingRating: number,
-	sellingRatingLength: number,
-	image: string,
-}, order: {
-	id: string,
-	title: string
-}, buyer: string) => ([
+export const approvedRequest = (
+	seller: {
+		id: string
+		name: string
+		buyingRating: number
+		buyingRatingLength: number
+		sellingRating: number
+		sellingRatingLength: number
+		image: string
+	},
+	order: {
+		id: string
+		title: string
+	},
+	buyer: string
+) => [
 	{
-		'type': 'section',
-		'text': {
-			'type': 'mrkdwn',
-			'text': `*New request to purchase "${order.title}" from <@${buyer}>!*`
-		}
+		type: 'section',
+		text: {
+			type: 'mrkdwn',
+			text: `*New request to purchase "${order.title}" from <@${buyer}>!*`,
+		},
 	},
 	{
 		type: 'section',
@@ -93,9 +99,7 @@ export const approvedRequest = (seller: {
 				seller.buyingRatingLength
 			} ratings): ${Array(Math.round(seller.buyingRating))
 				.fill('★')
-				.join('')} \n Seller Rating (${
-				seller.sellingRatingLength
-			} ratings): ${
+				.join('')} \n Seller Rating (${seller.sellingRatingLength} ratings): ${
 				Array(Math.round(seller.sellingRating)).fill('★').join('') || '★'
 			}\n Rated: ${seller.sellingRating} (S) / ${seller.buyingRating} (B)`,
 		},
@@ -106,32 +110,36 @@ export const approvedRequest = (seller: {
 		},
 	},
 	{
-		'type': 'section',
-		'text': {
-			'type': 'mrkdwn',
-			'text': `:white_check_mark: Approved!`
-		}
+		type: 'section',
+		text: {
+			type: 'mrkdwn',
+			text: `:white_check_mark: Approved!`,
+		},
 	},
-])
+]
 
-export const rejectedRequest = (seller: {
-	id: string,
-	name: string,
-	buyingRating: number,
-	buyingRatingLength: number,
-	sellingRating: number,
-	sellingRatingLength: number,
-	image: string,
-}, order: {
-	id: string,
-	title: string
-}, buyer: string) => ([
+export const rejectedRequest = (
+	seller: {
+		id: string
+		name: string
+		buyingRating: number
+		buyingRatingLength: number
+		sellingRating: number
+		sellingRatingLength: number
+		image: string
+	},
+	order: {
+		id: string
+		title: string
+	},
+	buyer: string
+) => [
 	{
-		'type': 'section',
-		'text': {
-			'type': 'mrkdwn',
-			'text': `*New request to purchase "${order.title}" from <@${buyer}>!*`
-		}
+		type: 'section',
+		text: {
+			type: 'mrkdwn',
+			text: `*New request to purchase "${order.title}" from <@${buyer}>!*`,
+		},
 	},
 	{
 		type: 'section',
@@ -141,9 +149,7 @@ export const rejectedRequest = (seller: {
 				seller.buyingRatingLength
 			} ratings): ${Array(Math.round(seller.buyingRating))
 				.fill('★')
-				.join('')} \n Seller Rating (${
-				seller.sellingRatingLength
-			} ratings): ${
+				.join('')} \n Seller Rating (${seller.sellingRatingLength} ratings): ${
 				Array(Math.round(seller.sellingRating)).fill('★').join('') || '★'
 			}\n Rated: ${seller.sellingRating} (S) / ${seller.buyingRating} (B)`,
 		},
@@ -154,10 +160,10 @@ export const rejectedRequest = (seller: {
 		},
 	},
 	{
-		'type': 'section',
-		'text': {
-			'type': 'mrkdwn',
-			'text': `:x: Rejected!`
-		}
+		type: 'section',
+		text: {
+			type: 'mrkdwn',
+			text: `:x: Rejected!`,
+		},
 	},
-])
+]
