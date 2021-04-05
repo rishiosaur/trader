@@ -1,16 +1,16 @@
+import { App } from '@slack/bolt';
 import { signing_secret, token, name } from './config';
-import { App } from "@slack/bolt";
 import { filterDM, filterNoBotMessages, filterChannel } from './middleware/index';
 import * as features from './features/index'
 
-const app = new App({
+export const app = new App({
     signingSecret: signing_secret,
-    token: token
+    token
 });
 
 (async () => {
       // Start your app
-  await app.start(process.env.PORT || 3000);
+  await app.start(process.env.PORT || 9908);
 
   console.log(`${name} is running! 🔥`);
 
@@ -18,5 +18,8 @@ const app = new App({
       handler(app);
       console.log(`Feature "${feature}" has been loaded.`)
   }
-  
+
+
+
+
 })()
